@@ -20,3 +20,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 // Route::resource(;)
+// Route::group(['middleware' => 'guest:api'], function () {
+//     Route::post('login', [LoginController::class, 'login']);
+
+//     Route::post('email/verify/{user}', [VerificationController::class, 'verify'])->name('verification.verify');
+//     Route::post('email/resend', [VerificationController::class, 'resend']);
+
+//     Route::post('oauth/{driver}', [OAuthController::class, 'redirect']);
+//     Route::get('oauth/{driver}/callback', [OAuthController::class, 'handleCallback'])->name('oauth.callback');
+// });
+
+Route::post('login', [LoginController::class, 'login']);
+Route::post('oauth/{driver}', [OAuthController::class, 'redirect']);
+Route::get('oauth/{driver}/callback', [OAuthController::class, 'handleCallback'])->name('oauth.callback');
