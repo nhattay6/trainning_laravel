@@ -31,5 +31,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // });
 
 Route::post('login', [LoginController::class, 'login']);
-Route::post('oauth/{driver}', [OAuthController::class, 'redirect']);
+Route::post('oauth/{driver}', [OAuthController::class, 'handleRedirect']);
 Route::get('oauth/{driver}/callback', [OAuthController::class, 'handleCallback'])->name('oauth.callback');
