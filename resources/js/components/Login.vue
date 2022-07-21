@@ -11,13 +11,13 @@
           </div>
 
           <div class="col">
-            <a href="#" class="fb btn">
+            <a href="#" class="fb btn" @click="loginWithSocial('facebook')">
               <i class="fa fa-facebook fa-fw"></i> Login with Facebook
             </a>
-            <a href="#" class="twitter btn" @click="loginWithSocial">
-              <i class="fa fa-twitter fa-fw"></i> Login with Gihub
+            <a href="#" class="twitter btn" @click="loginWithSocial('github')">
+              <i class="fa fa-twitter fa-fw"></i> Login with Github
             </a>
-            <a href="#" class="google btn">
+            <a href="#" class="google btn" @click="loginWithSocial('google')">
               <i class="fa fa-google fa-fw"></i> Login with Google+
             </a>
           </div>
@@ -59,6 +59,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   mounted() {
     console.log("Component mounted.");
@@ -74,11 +76,62 @@ export default {
       this.$router.push("/user/dashboard");
     },
     async login() {},
-    async loginWithSocial() {
-      // window.location.href = "/api/oauth/github/callback";
+    async loginWithSocial(provider) {
+      // window.location.href = `/api/oauth/${provider}/callback`;
+      const NewWindow = openWindow("", "message");
+
+      axios
+        .post(`api/oauth/${provider}/callback`)
+        .then((res) => {
+          NewWindow.location.href = res.data;
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     },
   },
 };
+
+function openWindow(url, title, options = {}) {
+  if (typeof url === "object") {
+    options = url;
+    url = "";
+  }
+
+  // copy no run :)
+  options = { url, title, width: 600, height: 720, ...options };
+
+  const dualScreenLeft =
+    window.screenLeft !== undefined ? window.screenLeft : window.screen.left;
+  const dualScreenTop =
+    window.screenTop !== undefined ? window.screenTop : window.screen.top;
+  const width =
+    window.innerWidth ||
+    document.documentElement.clientWidth ||
+    window.screen.width;
+  const height =
+    window.innerHeight ||
+    document.documentElement.clientHeight ||
+    window.screen.height;
+
+  options.left = width / 2 - options.width / 2 + dualScreenLeft;
+  options.top = height / 2 - options.height / 2 + dualScreenTop;
+
+  const optionsStr = Object.keys(options)
+    .reduce((acc, key) => {
+      acc.push(`${key}=${options[key]}`);
+      return acc;
+    }, [])
+    .join(",");
+
+  const newWindow = window.open(url, title, optionsStr);
+
+  if (window.focus) {
+    newWindow.focus();
+  }
+
+  return newWindow;
+}
 </script>
 
 
