@@ -40,20 +40,7 @@ Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
 Vue.use(VueSocialauth, {
     providers: {
-        google: {
-            clientId: '88e0a0f459045ac0a371',
-            client_secret: '3f6b423489259d17c104585e700ab62d6629cf33',
-            redirectUri: 'https://localhost:8000/auth/callback/google'
-        },
-        github: {
-            clientId: '88e0a0f459045ac0a371',
-            client_secret: '3f6b423489259d17c104585e700ab62d6629cf33',
-            redirectUri: 'https://localhost:8000/auth/callback/github'
-        },
-        facebook: {
-            clientId: '',
-            redirectUri: 'https://localhost:8000/auth/callback/github'
-        }
+   
     }
 });
 
