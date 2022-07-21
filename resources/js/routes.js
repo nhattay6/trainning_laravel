@@ -1,12 +1,12 @@
 const adminLogin = () => import('./components/Login.vue')
-const adminDashboard = () => import('./components/Home.vue')
+const dashboard = () => import('./components/Temp.vue')
 const home = () => import('./components/Home.vue')
 
 export const routes = [
     {   
         path: '/',
-        component: home,
-        name: "home"
+        component: adminLogin,
+        name: "adminLogin"
     },
     {   
         path: '/login',
@@ -15,7 +15,15 @@ export const routes = [
     },
     {
         path: '/dashboard',
-        component: adminDashboard,
-        name: "adminDashboard"
+        component: dashboard,
+        name: "dashboard"
+    },  
+    {
+        path: '/auth/:provider/callback',
+        // component: {
+        //     template: '<div class="auth-component"></div>'
+        // }
+        component: dashboard,
     },
+
 ];

@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\OutController;
+use App\Http\Controllers;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +22,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-// Route::resource(;)
+// Route::resource(;)\
+
+Route::post('login', [UserController::class, 'login']);
+Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
+
+Route::post('social/{provider}', [AuthController::class], 'social');
+
+Route::post('sociallogin/{provider}', [AuthController::class], 'socialSignup');
+Route::get('auth/{provider}/callback', [OutController::class], 'index')->where('provider', '.*');

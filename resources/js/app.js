@@ -31,12 +31,31 @@ import Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueRouter from 'vue-router';
+import VueSocialauth from 'vue-social-auth'
+// import nuxt from 'vue-social-auth/nuxt'
+import { routes } from './routes.js';
 // import store from './store';
-
 
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
-import { routes } from './routes.js';
+Vue.use(VueSocialauth, {
+    providers: {
+        google: {
+            clientId: '88e0a0f459045ac0a371',
+            client_secret: '3f6b423489259d17c104585e700ab62d6629cf33',
+            redirectUri: 'https://localhost:8000/auth/callback/google'
+        },
+        github: {
+            clientId: '88e0a0f459045ac0a371',
+            client_secret: '3f6b423489259d17c104585e700ab62d6629cf33',
+            redirectUri: 'https://localhost:8000/auth/callback/github'
+        },
+        facebook: {
+            clientId: '',
+            redirectUri: 'https://localhost:8000/auth/callback/github'
+        }
+    }
+});
 
 // import App from './App.vue'
 const App = () => import('./App.vue')
