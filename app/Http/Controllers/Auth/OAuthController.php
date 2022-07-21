@@ -31,12 +31,12 @@ class OAuthController extends Controller
      */
     public function handleRedirect(string $provider)
     {   
-        // return response()->json([
-        //     'url' => Socialite::driver($provider)->stateless()->redirect()->getTargetUrl(),
-        // ]);
+        return response()->json([
+            'url' => Socialite::driver($provider)->stateless()->redirect()->getTargetUrl(),
+        ]);
 
         //2
-        return Socialite::driver($provider)->redirect();
+        // return Socialite::driver($provider)->stateless()->redirect();
     }
 
     /**
