@@ -1,6 +1,7 @@
-const adminLogin = () => import('./components/Login.vue')
-const adminDashboard = () => import('./components/Home.vue')
+const topic = () => import('./components/Topic.vue')
+const category = () => import('./components/Category.vue')
 const home = () => import('./components/Home.vue')
+const notFound = () => import('./components/NotFound.vue')
 
 export const routes = [
     {   
@@ -9,13 +10,17 @@ export const routes = [
         name: "home"
     },
     {   
-        path: '/login',
-        component: adminLogin,
-        name: "adminLogin"
+        path: '/category',
+        component: category,
+        name: "category"
     },
     {
-        path: '/dashboard',
-        component: adminDashboard,
-        name: "adminDashboard"
+        path: '/topic',
+        component: topic,
+        name: "topic"
+    },
+    {
+        path: '*',
+        compone: notFound ,
     },
 ];

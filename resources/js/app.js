@@ -31,15 +31,14 @@ import Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueRouter from 'vue-router';
-// import store from './store';
+import store from './store';
+import { routes } from './routes.js';
 
+const App = () => import('./App.vue')
 
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
-import { routes } from './routes.js';
-
 // import App from './App.vue'
-const App = () => import('./App.vue')
 
 const router = new VueRouter({
     mode: 'history',
@@ -49,7 +48,7 @@ const router = new VueRouter({
 const app = new Vue({
     el: '#app',
     router: router,
-    // stote: store,
+    stote: store,
     render: (h) => h(App),
 });
 
